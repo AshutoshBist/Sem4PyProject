@@ -13,10 +13,6 @@ page_soup = soup(page_html, "html.parser")
 title = page_soup.find_all("div", {"class": "_3wU53n"})
 product_link = page_soup.find_all("a", {"class": "_31qSD5"})
 selling_price = page_soup.find_all("div", {"class": "_1vC4OE _2rQ-NK"})
-
-print(title[0].text)
-print(product_link[0].get("href"))
-print(selling_price[0].text)
 seller = "Flipkart"
 
 conn = sqlite3.connect('Database.sql')
@@ -26,11 +22,7 @@ cursor.execute(
 i = 0
 while i < len(title):
     cursor = conn.cursor()
-    tup1 = (title[i].text, product_link[i].get("href"), selling_price[i].text, seller)
-    query1 = (
-        'INSERT INTO Database (title text, product_link text,selling_price text,seller text) VALUES("%s",'
-        '"%s","%s","%s")')
-    cursor.execute(query1 % tup1)
+    conn.execute("INSERT INTO Database VALUES(?,?,?,?)", (title[i].text, product_link[i].get("href"),selling_price[0].text, seller))
     conn.commit()
     print("\n")
     i += 1
