@@ -1,14 +1,36 @@
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
+import sqlite3
 
 # opening up the connection and grabbing the page
-my_url = 'https://www.flipkart.com/search?q=graphics+card&sort=relevance'
+my_url = 'https://www.flipkart.com/search?q=predator&sort=relevance'
 uClient = uReq(my_url)
 page_html = uClient.read()
 uClient.close()
 
 # html parsing
 page_soup = soup(page_html, "html.parser")
-containers = page_soup.find_all("div", {"class": "_3liAhj _1R0K0g"})
-print(len(containers))
-print(containers[0])
+title = page_soup.find_all("div", {"class": "_3wU53n"})
+product_link = page_soup.find_all("a", {"class": "_31qSD5"})
+selling_price = page_soup.find_all("div", {"class": "_1vC4OE _2rQ-NK"})
+
+print(title[0].text)
+print(product_link[0].get("href"))
+print(selling_price[0].text)
+seller = "Flipkart"
+
+conn = sqlite3.connect('Database.sql')
+cursor = conn.cursor()
+cursor.execute(
+    'create table if not exists Database (title varchar, product_link varchar,selling_price varchar,seller varchar)')
+i = 0
+while i < len(title):
+    cursor = conn.cursor()
+    tup1 = (title[i].text, product_link[i].get("href"), selling_price[i].text, seller)
+    query1 = (
+        'INSERT INTO Database (title text, product_link text,selling_price text,seller text) VALUES("%s",'
+        '"%s","%s","%s")')
+    cursor.execute(query1 % tup1)
+    conn.commit()
+    print("\n")
+    i += 1
