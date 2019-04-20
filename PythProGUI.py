@@ -1,42 +1,111 @@
 import tkinter
 from tkinter import *
+from urllib.request import urlopen as uReq
+from bs4 import BeautifulSoup as soup
+import sqlite3
 
 
-def uprod():
-    prodname = Sbox.get()
-    prodword = prodname.split()
-    n = len(prodword)
-    print(n)
+def on_click():
+    conn = sqlite3.connect('Database.db')
+    cursor = conn.cursor()
+    cursor.execute('DROP TABLE if exists Database')
+    cursor.execute(
+        'create table if not exists Database (title varchar, product_link varchar,selling_price int,seller varchar)')
 
-    if n == 1:
-        produrl = prodword[0]
-    else:
-        produrl = prodword[0]
-        for i in range(1, n):
-            produrl = str(produrl + '+' + prodword[i])
+    text = Sbox.get()
 
-    amazon = produrl
-    return amazon
+    F_link = 'https://www.flipkart.com/search?q=' + text + '&sort=relevance'
+    # opening up the connection and grabbing the page
+    my_url = F_link
+    uClient = uReq(my_url)
+    page_html = uClient.read()
+    uClient.close()
+
+    # html parsing
+    page_soup = soup(page_html, "html.parser")
+    title = page_soup.find_all("div", {"class": "_3wU53n"})
+    product_link = page_soup.find_all("a", {"class": "_31qSD5"})
+    selling_price1 = page_soup.find_all("div", {"class": "_1vC4OE _2rQ-NK"})
+    selling_price = []
+    i = 0
+    for i in range(0, len(selling_price1)):
+        k = selling_price1[i].text
+        k = k.replace(",", "")
+        selling_price.append(int(k.replace("₹", "")))
+    seller = "Flipkart"
+
+    i = 0
+    l = 10
+    if len(title) < 10:
+        l = len(title)
+    gcount = l
+    while i < l:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO Database VALUES(?,?,?,?)",(title[i].text, product_link[i].get("href"), selling_price[i], seller))
+        conn.commit()
+        print("\n")
+        i += 1
+
+    E_link = 'https://www.newegg.com/global/in-en/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=' + text + '&N=-1&isNodeId=1'
+    # opening up the connection and grabbing the page
+    my_url = E_link
+    uClient = uReq(my_url)
+    page_html = uClient.read()
+    uClient.close()
+
+    # html parsing
+    page_soup = soup(page_html, "html.parser")
+    title = page_soup.find_all("a", {"class": "item-title"})
+    product_link = page_soup.find_all("a", {"class": "item-title"})
+    selling_price1 = page_soup.find_all("li", {"class": "price-current"})
+
+    i = 0
+    selling_price = []
+    for i in range(0, len(selling_price1)):
+        k1 = []
+        k = selling_price1[i].text
+        k1 = k.split()
+        selling_price.append(int(k1[1].replace(",", "")))
+    seller = "Newegg"
+
+    i = 0
+    l = 10
+    if len(title) < 10:
+        l = len(title)
+    gcount = gcount + l
+    while i < l:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO Database VALUES(?,?,?,?)",
+                       (title[i].text, product_link[i].get("href"), selling_price[i], seller))
+        conn.commit()
+        print("\n")
+        i += 1
+
+    for i in range(0, gcount):
+        root = Frame(main, width=768, height=576)
+        root.pack()
+
+        cursor.execute('SELECT title,product_link,selling_price,seller FROM Database ORDER BY selling_price ASC')
+        Best_Deals = cursor.fetchall()
+        print(Best_Deals)
 
 
 
 main = Tk()
 main.title("Best Deals")
+main.configure(bg='#999999')
 main.geometry("800x600")
 
-# root = Frame(main, bg='#30D9D8')
-# root.pack()
-
-L1 = Label(main, text='Best Deal', fg='#CD3131', font="Georgia 20 bold", bd=20)
-L1.pack()
+L1 = Label(main, text='Best Deal', fg='#CD3131', bg='#999999', font="Georgia 20 bold", bd=20)
+L1.pack(side=TOP)
 
 Sbox = Entry(main, text='Product Name', bd=5, width=50, font="Georgia 16 ")
-Sbox.pack()
+Sbox.pack(side=TOP)
 
-E_Searched = tkinter.Button(main, text="Go", font="Georgia 16 ", activebackground='#30D9D8',command=uprod)
-E_Searched.pack()
+E_Searched = tkinter.Button(main, text="Go", font="Georgia 16 ", activebackground='#30D9D8', command=on_click)
+E_Searched.pack(side=TOP, padx=5, pady=5)
 
-for i in range(0,3):
-
+separator = Frame(height=2, bd=1, relief=SUNKEN)
+separator.pack(fill=X, padx=5, pady=5)
 
 main.mainloop()
