@@ -14,7 +14,7 @@ def on_click():
 
     text = Sbox.get()
 
-    F_link = 'https://www.flipkart.com/search?q=' + text + '&sort=relevance'
+    F_link = 'https://www.flipkart.com/search?q=' + text.replace(" ","+") + '&sort=relevance'
     # opening up the connection and grabbing the page
     my_url = F_link
     uClient = uReq(my_url)
@@ -41,12 +41,13 @@ def on_click():
     gcount = l
     while i < l:
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO Database VALUES(?,?,?,?)",(title[i].text, product_link[i].get("href"), selling_price[i], seller))
+        cursor.execute("INSERT INTO Database VALUES(?,?,?,?)",
+                       (title[i].text, product_link[i].get("href"), selling_price[i], seller))
         conn.commit()
         print("\n")
         i += 1
 
-    E_link = 'https://www.newegg.com/global/in-en/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=' + text + '&N=-1&isNodeId=1'
+    E_link = 'https://www.newegg.com/global/in-en/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=' + text.replace(" ","+") + '&N=-1&isNodeId=1'
     # opening up the connection and grabbing the page
     my_url = E_link
     uClient = uReq(my_url)
@@ -81,15 +82,28 @@ def on_click():
         print("\n")
         i += 1
 
-    for i in range(0, gcount):
-        root = Frame(main, width=768, height=576)
-        root.pack()
+    root = Frame(main, width=768, height=576)
+    root.pack()
+    db_title = []
+    db_productlink = []
+    db_productprice = []
+    db_company = []
+    cursor.execute('SELECT title,product_link,selling_price,seller FROM Database ORDER BY selling_price ASC')
+    for row in cursor.fetchall():
+        db_title.append(row[0].strip())
+        db_productlink.append(row[1])
+        db_productprice.append(row[2])
+        db_company.append(row[3])
 
-        cursor.execute('SELECT title,product_link,selling_price,seller FROM Database ORDER BY selling_price ASC')
-        Best_Deals = cursor.fetchall()
-        print(Best_Deals)
 
-
+    for i in range(0, 20):
+        print(db_title[i])
+    for i in range(0, 20):
+        print(db_productlink[i])
+    for i in range(0, 20):
+        print(db_productprice[i])
+    for i in range(0, 20):
+        print(db_company[i])
 
 main = Tk()
 main.title("Best Deals")
