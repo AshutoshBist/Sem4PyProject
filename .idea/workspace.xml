@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52fab6b9-62fc-42b9-9d19-044e6d5d78fb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/py project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/py project.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scrape.py" beforeDir="false" afterPath="$PROJECT_DIR$/scrape.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PythProGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythProGUI.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scrape.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+            <state relative-caret-position="476">
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -25,11 +27,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/db.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+            <state relative-caret-position="187">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/PythProGUI.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="646">
+              <caret line="38" selection-start-line="38" selection-end-line="39" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,14 +65,16 @@
       <list>
         <option value="$PROJECT_DIR$/db.py" />
         <option value="$PROJECT_DIR$/scrape.py" />
+        <option value="$PROJECT_DIR$/Test.py" />
+        <option value="$PROJECT_DIR$/AScape.py" />
+        <option value="$PROJECT_DIR$/PythProGUI.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="85" />
-    <option name="y" value="25" />
-    <option name="width" value="1750" />
-    <option name="height" value="980" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -66,23 +82,24 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="py project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="py project" type="462c0819:PsiDirectoryNode" />
+              <item name="Sem4PyProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Sem4PyProject" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -96,7 +113,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scrape">
+  <component name="RunManager" selected="Python.PythProGUI">
     <configuration name="3.8" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="py project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -118,7 +135,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="CeltoFar" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="PythProGUI" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="py project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -126,11 +143,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/PycharmProjects/Assignment 1" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/PycharmProjects/Assignment 1/CeltoFar.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PythProGUI.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="py project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -183,10 +221,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.PythProGUI" />
+        <item itemvalue="Python.Test" />
         <item itemvalue="Python.scrape" />
         <item itemvalue="Python.3.8" />
         <item itemvalue="Python.multiplicationtable" />
-        <item itemvalue="Python.CeltoFar" />
       </list>
     </recent_temporary>
   </component>
@@ -204,15 +243,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="953" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25670242" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14113785" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.24611032" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24835886" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -238,27 +277,42 @@
     </entry>
     <entry file="file://$USER_HOME$/PycharmProjects/Assignment 1/CeltoFar.py" />
     <entry file="file://$USER_HOME$/PycharmProjects/Assignment 2/multiplicationtable.py" />
-    <entry file="file://$USER_HOME$/PycharmProjects/Assignment 3/3.8.py">
+    <entry file="file://$USER_HOME$/PycharmProjects/Assignment 3/3.8.py" />
+    <entry file="file://$PROJECT_DIR$/db.py" />
+    <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="4" column="19" selection-end-line="46" />
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scrape.py">
+    <entry file="file://$PROJECT_DIR$/AScape.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+        <state relative-caret-position="85">
+          <caret line="5" column="67" selection-start-line="5" selection-start-column="67" selection-end-line="5" selection-end-column="67" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db.py">
+    <entry file="file://$PROJECT_DIR$/scrape.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+        <state relative-caret-position="476">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PythProGUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="38" selection-start-line="38" selection-end-line="39" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
