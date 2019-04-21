@@ -140,7 +140,6 @@ def on_click():
         db_productprice.append(row[2])
         db_company.append(row[3])
 
-
     def myfunction(event):
         canvas.configure(scrollregion=canvas.bbox("all"), width=760, height=500)
 
@@ -151,9 +150,15 @@ def on_click():
 
     outer = Frame(main, height=760, width=500)
     outer.pack(padx=5, pady=5)
+
     canvas = Canvas(outer)
     root = Frame(canvas)
+
+    b = Button(root, text="Clear", font="Georgia 16 ", activebackground='#30D9D8', command=lambda: outer.pack_forget())
+    b.pack(padx=5, pady=5)
+
     myscrollbar = Scrollbar(outer, orient="vertical", command=canvas.yview)
+
     canvas.configure(yscrollcommand=myscrollbar.set)
     myscrollbar.pack(side="right", fill="y")
 
@@ -183,6 +188,8 @@ main = Tk()
 main.title("Best Deals")
 main.configure(bg='#999999')
 main.geometry("800x600")
+
+n = 0
 
 L1 = Label(main, text='Best Deal', fg='#CD3131', bg='#999999', font="Georgia 20 bold", bd=20)
 L1.pack(side=TOP)
