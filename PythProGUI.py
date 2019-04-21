@@ -3,6 +3,7 @@ from tkinter import *
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 import sqlite3
+import webbrowser
 
 
 def on_click():
@@ -16,7 +17,7 @@ def on_click():
 
     text = Sbox.get()  # GETS THE TEXT FROM THE SEARCH BOX
 
-    #FLIPKART SCRAPE 1
+    # FLIPKART SCRAPE 1
 
     F_link = 'https://www.flipkart.com/search?q=' + text.replace(" ", "+") + '&sort=relevance'  # CREATES THE LINK
     # opening up the connection and grabbing the page
@@ -46,16 +47,15 @@ def on_click():
     while i < l:
         cursor = conn.cursor()
         cursor.execute("INSERT INTO Database VALUES(?,?,?,?)",
-                       (title[i].text,'https://www.flipkart.com'+product_link[i].get("href"), selling_price[i], seller))
+                       (title[i].text, 'https://www.flipkart.com' + product_link[i].get("href"), selling_price[i],
+                        seller))
         conn.commit()
         print("\n")
         i += 1
 
+    # FLIPKART SCRAPE 2
 
-
-    #FLIPKART SCRAPE 2
-
-    my_url=F_link
+    my_url = F_link
     uClient = uReq(my_url)
     page_html = uClient.read()
     uClient.close()
@@ -80,16 +80,13 @@ def on_click():
     while i < l:
         cursor = conn.cursor()
         conn.execute("INSERT INTO Database VALUES(?,?,?,?)",
-                     (title[i].text, 'https://www.flipkart.com/'+product_link[i].get("href"), selling_price[i], seller))
+                     (title[i].text, 'https://www.flipkart.com/' + product_link[i].get("href"), selling_price[i],
+                      seller))
         conn.commit()
         print("\n")
         i += 1
 
-
-
-    #NEW EGG SCRAPE
-
-
+    # NEW EGG SCRAPE
 
     E_link = 'https://www.newegg.com/global/in-en/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=' + text.replace(
         " ", "+") + '&N=-1&isNodeId=1'
@@ -132,8 +129,6 @@ def on_click():
             print("\n")
         i += 1
 
-    root = Frame(main, width=768, height=576)
-    root.pack()
     db_title = []
     db_productlink = []
     db_productprice = []
@@ -145,14 +140,43 @@ def on_click():
         db_productprice.append(row[2])
         db_company.append(row[3])
 
-    for i in range(0, len(db_title)):
-        print(db_title[i])
-    for i in range(0, len(db_title)):
-        print(db_productlink[i])
-    for i in range(0, len(db_title)):
-        print(db_productprice[i])
-    for i in range(0, len(db_title)):
-        print(db_company[i])
+
+    def myfunction(event):
+        canvas.configure(scrollregion=canvas.bbox("all"), width=760, height=500)
+
+    def open_url(url):
+        pass
+        link = url
+        webbrowser.open_new_tab(link)
+
+    outer = Frame(main, height=760, width=500)
+    outer.pack(padx=5, pady=5)
+    canvas = Canvas(outer)
+    root = Frame(canvas)
+    myscrollbar = Scrollbar(outer, orient="vertical", command=canvas.yview)
+    canvas.configure(yscrollcommand=myscrollbar.set)
+    myscrollbar.pack(side="right", fill="y")
+
+    for i in range(0, 10):
+        product = Frame(root)
+        l1 = Label(product, text=db_title[i], font="Georgia 16", wraplength=700)
+        l1.pack(padx=5, pady=5)
+        l2 = Label(product, text='Price : ₹ ' + str(db_productprice[i]), font="Georgia 16")
+        l2.pack(padx=5, pady=5)
+        l3 = Label(product, text=db_productlink[i], font="Georgia 16", wraplength=700, fg="blue", cursor="hand2")
+        url = l3.cget("text")
+        l3.bind("<Button-1>", lambda e, url=url: open_url(url))
+        l3.pack()
+        l3.pack(padx=5, pady=5)
+        l4 = Label(product, text=db_company[i], font="Georgia 16")
+        l4.pack(padx=5, pady=5)
+        product.pack(padx=5, pady=5)
+        separator = Frame(root, height=2, bd=1, relief=SUNKEN)
+        separator.pack(fill=X, padx=5, pady=5)
+
+    canvas.pack(side=LEFT)
+    canvas.create_window((0, 0), window=root, anchor='nw')
+    root.bind("<Configure>", myfunction)
 
 
 main = Tk()
