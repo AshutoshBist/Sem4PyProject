@@ -6,15 +6,17 @@ import sqlite3
 
 
 def on_click():
+    # CONNECT TO DATABASE
+
     conn = sqlite3.connect('Database.db')
     cursor = conn.cursor()
-    cursor.execute('DROP TABLE if exists Database')
+    cursor.execute('DROP TABLE if exists Database')  #CLEAR PREVIOUS EXISTING TABLE
     cursor.execute(
-        'create table if not exists Database (title varchar, product_link varchar,selling_price int,seller varchar)')
+        'create table if not exists Database (title varchar, product_link varchar,selling_price int,seller varchar)') #ADDS TABLE IT DOES NOT EXIST
 
-    text = Sbox.get()
+    text = Sbox.get()   #GETS THE TEXT FROM THE SEARCH BOX
 
-    F_link = 'https://www.flipkart.com/search?q=' + text.replace(" ","+") + '&sort=relevance'
+    F_link = 'https://www.flipkart.com/search?q=' + text.replace(" ","+") + '&sort=relevance' #CREATES THE LINK
     # opening up the connection and grabbing the page
     my_url = F_link
     uClient = uReq(my_url)
