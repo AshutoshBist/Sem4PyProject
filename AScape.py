@@ -10,8 +10,8 @@ uClient.close()
 
 # html parsing
 page_soup = soup(page_html, "html.parser")
-title = page_soup.find_all("a", {"class": "item-title"})
-product_link = page_soup.find_all("a", {"class": "item-title"})
+title = page_soup.find_all("a", {"title": "View Details"})
+product_link = page_soup.find_all("a", {"title": "View Details"})
 selling_price1 = page_soup.find_all("li", {"class": "price-current"})
 selling_price=[]
 for i in range(0, len(selling_price1)):

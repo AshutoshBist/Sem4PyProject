@@ -1,19 +1,19 @@
-from tkinter import *
-import  webbrowser
+from urllib.request import urlopen as uReq
+from bs4 import BeautifulSoup as soup
+import sqlite3
 
-def open_url(url):
-    pass
-    link=url
-    webbrowser.open_new_tab(link)
+# opening up the connection and grabbing the page
+my_url = 'https://www.newegg.com/global/in-en/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=samsung&N=-1&isNodeId=1'
+uClient = uReq(my_url)
+page_html = uClient.read()
+uClient.close()
+page_soup = soup(page_html, "html.parser")
+scraped = page_soup.find_all("a", {"title": "View Details"})
+title=[]
+for i in range(len(scraped)):
+    title.append(scraped[i].text)
+for i in range(len(title)):
+    print(title[i])
 
-main = Tk()
-url_list=[]
-for i in range(10):
-    l3 = Label(main, text="www.google.com/search?client=firefox-b-d&q=" + str(i), font="Georgia 16", wraplength=700,fg="blue", cursor="hand2")
-    print(l3)
-    url_list.append(l3.cget("text"))
-    url=l3.cget("text")
-    l3.bind("<Button-1>",lambda e,url=url:open_url(url))
-    l3.pack()
 
-main.mainloop()
+print(title[0])
